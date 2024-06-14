@@ -133,7 +133,7 @@ resources:
 extraVolumes:
    - name: spi
      configMap:
-       name: {{ include "keycloak.fullname" . }}-spi
+       name: keycloak-spi
 extraVolumeMounts:
    - name: spi
      mountPath: /opt/keycloak/providers
