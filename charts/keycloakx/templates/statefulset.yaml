@@ -212,9 +212,6 @@ spec:
       {{- end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       volumes:
-        - name: spi
-          configMap:
-            name: {{ include "keycloak.fullname" . }}-spi
         {{- with .Values.startupScripts }}
         - name: startup
           configMap:
