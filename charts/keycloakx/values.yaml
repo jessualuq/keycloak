@@ -137,6 +137,8 @@ extraVolumes: |
 extraVolumeMounts: |
    - name: spi
      mountPath: /opt/keycloak/providers
+   - name: db-connector-jar
+              mountPath: /opt/keycloak/providers
 extraPorts: []
 podDisruptionBudget: {}
 statefulsetAnnotations: {}
