@@ -171,9 +171,7 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          volumeMounts:
-            - name: spi
-              mountPath: /opt/keycloak/providers
+          volumeMounts:            
             {{- with .Values.extraVolumeMounts }}
             {{- tpl . $ | nindent 12 }}
             {{- end }}
