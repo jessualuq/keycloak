@@ -7,5 +7,4 @@ metadata:
 binaryData:
   spi_temis_grupos-1.0.0.jar: |-
     {{ .Files.Get "spi/spi_temis_grupos-1.0.0.jar" | b64enc | indent 4 }}
-  ojdbc8-23.2.0.0.jar: |-
-    {{ .Files.Get "spi/ojdbc8-23.2.0.0.jar" | b64enc | indent 4 }}
+ 
