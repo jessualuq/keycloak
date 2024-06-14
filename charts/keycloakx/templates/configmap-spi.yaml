@@ -4,8 +4,6 @@ metadata:
   name: {{ include "keycloak.fullname" . }}-spi
   labels:
     {{- include "keycloak.labels" . | nindent 4 }}
-binaryData:
-  spi_temis_grupos-1.0.0.jar: |-
-    {{ .Files.Get "spi/spi_temis_grupos-1.0.0.jar" | b64enc | indent 4 }}
+binaryData: 
   ojdbc8-23.2.0.0.jar: |-
     {{ .Files.Get "spi/ojdbc8-23.2.0.0.jar" | b64enc | indent 4 }}
