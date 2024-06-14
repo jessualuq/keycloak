@@ -130,11 +130,16 @@ resources:
   limits:
     cpu: "2000m"
     memory: "2Gi"
-extraVolumes: {}
+extraVolumes:
+   - name: spi
+     configMap:
+       name: {{ include "keycloak.fullname" . }}-spi
 #  - name: keycloak-realms
 #    persistentVolumeClaim:
 #      claimName: keycloak-pvc
-extraVolumeMounts: {}
+extraVolumeMounts:
+   - name: spi
+     mountPath: /opt/keycloak/providers
 #  - name: keycloak-realms
 #    mountPath: /opt/kubernetes/keycloak/realms
 extraPorts: []
