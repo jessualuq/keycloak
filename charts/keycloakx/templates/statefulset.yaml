@@ -39,7 +39,7 @@ spec:
         {{- printf "%s: %s" $key (tpl $value $ | quote) | nindent 8 }}
         {{- end }}
     spec:
-    {{- if not .Values.skipInitContainers }}
+      {{- if not .Values.skipInitContainers }}
       {{- if or .Values.dbchecker.enabled .Values.extraInitContainers }}
       initContainers:
         - name: init-db-connector-download
@@ -56,7 +56,7 @@ spec:
               mountPath: /db-connector-jar
         {{- if and .Values.dbchecker.enabled }}
         - name: dbchecker
-          image: "{{ .Values.dbchecker.image.repository }}{{- if (.Values.dbchecker.image.digest) -}}@{{ .Values.dbchecker.image.digest }}{{- else -}}:{{ .Values.dbchecker.image.tag }} {{- end }}"
+          image: "{{ .Values.dbchecker.image.repository }}{{- if (.Values.dbchecker.image.digest) -}}@{{ .Values.dbchecker.image.digest }}{{- else -}}:{{ .Values.dbchecker.image.tag }}{{- end }}"
           imagePullPolicy: {{ .Values.dbchecker.image.pullPolicy }}
           securityContext:
             {{- toYaml .Values.dbchecker.securityContext | nindent 12 }}
@@ -78,12 +78,12 @@ spec:
         {{- tpl . $ | nindent 8 }}
         {{- end }}
       {{- end }}
-    {{- end }}
+      {{- end }}
       containers:
         - name: keycloak
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}{{- if (.Values.image.digest) -}}@{{ .Values.image.digest }}{{- else -}}:{{ .Values.image.tag | default .Chart.AppVersion }} {{- end }}"
+          image: "{{ .Values.image.repository }}{{- if (.Values.image.digest) -}}@{{ .Values.image.digest }}{{- else -}}:{{ .Values.image.tag | default .Chart.AppVersion }}{{- end }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.command }}
           command:
@@ -95,7 +95,7 @@ spec:
           {{- end }}
           {{- with .Values.lifecycleHooks }}
           lifecycle:
-          {{- tpl . $ | nindent 12 }}
+            {{- tpl . $ | nindent 12 }}
           {{- end }}
           env:
             {{- if and (.Values.http.relativePath) (eq .Values.http.relativePath "/")  }}
@@ -135,7 +135,7 @@ spec:
             - name: KC_DB_USERNAME
               value: {{ .Values.database.username }}
             {{- end }}
-            {{- if or .Values.database.password .Values.database.existingSecret -}}
+            {{- if or .Values.database.password .Values.database.existingSecret }}
             {{- include "keycloak.databasePasswordEnv" . | nindent 12 }}
             {{- end }}
             {{- if .Values.metrics.enabled }}
@@ -175,11 +175,10 @@ spec:
           readinessProbe:
             {{- tpl . $ | nindent 12 }}
           {{- end }}
-          {{- end}}
+          {{- end }}
           {{- with .Values.startupProbe }}
           startupProbe:
             {{- tpl . $ | nindent 12 }}
-          {{- end }}
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
