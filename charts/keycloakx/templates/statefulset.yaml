@@ -42,6 +42,18 @@ spec:
     {{- if not .Values.skipInitContainers }}
       {{- if or .Values.dbchecker.enabled .Values.extraInitContainers }}
       initContainers:
+        - name: init-db-connector-download
+          image: busybox:1.32
+          command:
+            - /bin/sh
+            - "-c"
+            - |
+              set -e
+              connector_version=8.0.17
+              wget "{{ .Values.wso2.deployment.am.cp.db.driver_url }}" -P /db-connector-jar/ 
+          volumeMounts:
+            - name: db-connector-jar
+              mountPath: /db-connector-jar
         {{- if and .Values.dbchecker.enabled }}
         - name: dbchecker
           image: "{{ .Values.dbchecker.image.repository }}{{- if (.Values.dbchecker.image.digest) -}}@{{ .Values.dbchecker.image.digest }}{{- else -}}:{{ .Values.dbchecker.image.tag }} {{- end }}"
