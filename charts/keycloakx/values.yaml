@@ -130,11 +130,11 @@ resources:
   limits:
     cpu: "2000m"
     memory: "2Gi"
-extraVolumes:
+extraVolumes: |
    - name: spi
      configMap:
        name: keycloak-spi
-extraVolumeMounts:
+extraVolumeMounts: |
    - name: spi
      mountPath: /opt/keycloak/providers
 extraPorts: []
