@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-quarkus
+  labels:
+    {{- include "keycloak.labels" . | nindent 4 }}
+data:
+  quarkus.properties: |
+    quarkus.transaction-manager.default-transaction-timeout=PT16H
